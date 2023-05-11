@@ -1,0 +1,8 @@
+#!/bin/sh
+
+PS3='>> '
+select word in `emulator -list-avds`
+do
+    emulator -avd $word -netdelay none -netspeed full
+    break
+done
