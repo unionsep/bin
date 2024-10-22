@@ -1,0 +1,10 @@
+#!/bin/bash
+
+select_log_groups=$(aws logs describe-log-groups --query 'logGroups[*].logGroupName' --output text | tr '\t' '\n' | peco)
+
+if [ -n "$select_log_groups" ]; then
+  aws logs tail --follow $select_log_groups
+else
+  echo "No log group selected. Exiting."
+  exit 1
+fi
